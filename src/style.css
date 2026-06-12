@@ -34,3 +34,13 @@ li span {
 ul {
   margin-left: 2rem;
 }
+
+#kalkulator {
+  margin-left: 3rem;
+
+  & h3 {
+    margin-left: 0;
+    margin-bottom: 0;
+    font-weight: 600;
+  }
+}

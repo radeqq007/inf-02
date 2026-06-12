@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MikroTik - DNS i Firewall</title>
+    <link rel="stylesheet" href="../src/style.css" />
+  </head>
+  <body>
+    <h2>DNS i Firewall (NAT) w MikroTik (RouterOS / WinBox)</h2>
+
+    <h3>Teoria</h3>
+    <ul>
+      <li>
+        <strong>Allow Remote Requests</strong> – opcja aktywująca funkcję
+        lokalnego serwera DNS dla urządzeń w sieci lokalnej
+      </li>
+      <li>
+        <strong>Atak DNS Amplification</strong> – zagrożenie polegające na
+        zasypywaniu routera zapytaniami z zewnątrz; wymaga zablokowania portu 53
+        na interfejsie WAN
+      </li>
+      <li>
+        <strong>Source NAT (srcnat / Masquerade)</strong> – maskarada; ukrywa
+        adresy IP sieci lokalnej za jednym publicznym adresem interfejsu WAN,
+        umożliwiając dostęp do internetu
+      </li>
+      <li>
+        <strong>Fasttrack</strong> – funkcja omijająca sprawdzanie niektórych
+        reguł firewall dla pakietów w już nawiązanych połączeniach, co
+        drastycznie zmniejsza zużycie procesora
+      </li>
+    </ul>
+
+    <h3>Konfiguracja przez WinBox (GUI)</h3>
+    <ul>
+      <li>
+        <strong>Konfiguracja DNS:</strong> Menu główne → <span>IP</span> →
+        <span>DNS</span> → W polu <span>Servers</span> wpisz np.
+        <span>8.8.8.8</span>, kliknij strzałkę w dół i dodaj
+        <span>1.1.1.1</span> → Zaznacz opcję
+        <span>Allow Remote Requests</span> → Kliknij <span>OK</span>. Aby dodać
+        lokalny rekord, kliknij przycisk <span>Static</span> → Kliknij
+        <span>+</span> → Wpisz <span>Name</span> oraz <span>Address</span>.
+      </li>
+      <li>
+        <strong>Uruchomienie NAT (Maskarada):</strong> Menu główne →
+        <span>IP</span> → <span>Firewall</span> → Zakładka <span>NAT</span> →
+        Kliknij niebieski plus <span>+</span> → W zakładce
+        <span>General</span> ustaw <span>Chain=srcnat</span> oraz
+        <span>Out. Interface=ether1</span> (lub inny port WAN) → Przejdź do
+        zakładki <span>Action</span> → W polu <span>Action</span> wybierz
+        <span>masquerade</span> → Kliknij <span>OK</span>
+      </li>
+      <li>
+        <strong>Zabezpieczenie portu DNS (Zapora):</strong> Menu główne →
+        <span>IP</span> → <span>Firewall</span> → Zakładka
+        <span>Filter Rules</span> → Kliknij niebieski plus <span>+</span> →
+        Zakładka <span>General</span>: <span>Chain=input</span>,
+        <span>Protocol=17 (udp)</span>, <span>Dst. Port=53</span>,
+        <span>In. Interface=ether1</span> (port WAN) → Zakładka
+        <span>Action</span>: <span>Action=drop</span> → Kliknij <span>OK</span>.
+        Powtórz krok, zmieniając protokół na <span>6 (tcp)</span>.
+      </li>
+    </ul>
+
+    <h3>Konfiguracja przez CLI (Komendy)</h3>
+    <ul>
+      <li>
+        <span
+          >/ip dns set servers=8.8.8.8,1.1.1.1 allow-remote-requests=yes</span
+        >
+        – konfiguruje serwery nadrzędne i zezwala na obsługę zapytań z sieci LAN
+      </li>
+      <li>
+        <span
+          >/ip dns static add name="router.local" address=192.168.88.1
+          ttl=1d</span
+        >
+        – dodaje statyczny lokalny rekord A
+      </li>
+      <li>
+        <span
+          >/ip firewall nat add chain=srcnat out-interface=ether1
+          action=masquerade comment="Maskarada WAN"</span
+        >
+        – uruchamia podstawowy NAT (wyjście na świat)
+      </li>
+      <li>
+        <span
+          >/ip firewall filter add chain=input action=drop protocol=udp
+          dst-port=53 in-interface=ether1 comment="Blokada DNS z WAN"</span
+        >
+        – zabezpiecza port 53 UDP przed zapytaniami z internetu
+      </li>
+    </ul>
+  </body>
+</html>
