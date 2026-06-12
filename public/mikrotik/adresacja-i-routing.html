@@ -10,26 +10,26 @@
 
     <h3>Teoria</h3>
     <ul>
-      <li>Adres IP musi być przypisany do konkretnego interfejsu fizycznego (np. <span>ether1</span>) lub logicznego (np. <span>bridge</span>)</li>
+      <li>Adres IP musi być przypisany do konkretnego interfejsu fizycznego (np. <strong>ether1</strong>) lub logicznego (np. <strong>bridge</strong>)</li>
       <li><strong>Trasa dynamiczna (DAC)</strong> – Dynamic Active Connected; tworzona automatycznie przez system po przypisaniu adresu IP do interfejsu</li>
-      <li><strong>Brama domyślna (Default Gateway)</strong> – trasa statyczna dla ruchu docelowego do sieci zewnętrznych (oznaczana jako <span>0.0.0.0/0</span>)</li>
+      <li><strong>Brama domyślna (Default Gateway)</strong> – trasa statyczna dla ruchu docelowego do sieci zewnętrznych (oznaczana jako <strong>0.0.0.0/0</strong>)</li>
       <li><strong>Dystans (Distance)</strong> – określa priorytet trasy w tabeli routingu; trasa z niższym dystansem jest wybierana w pierwszej kolejności</li>
-      <li><strong>Aktywność trasy (Active)</strong> – trasa jest aktywna (oznaczenie <span>A</span>), gdy jej brama (gateway) jest osiągalna (reachable)</li>
+      <li><strong>Aktywność trasy (Active)</strong> – trasa jest aktywna (oznaczenie <strong>A</strong>), gdy jej brama (gateway) jest osiągalna (reachable)</li>
     </ul>
 
     <h3>Konfiguracja przez WinBox (GUI)</h3>
     <ul>
-      <li><strong>Dodawanie adresu IP:</strong> Menu główne → <span>IP</span> → <span>Addresses</span> → Kliknij niebieski plus <span>+</span> → W polu <span>Address</span> wpisz np. <span>192.168.88.1/24</span> → W polu <span>Interface</span> wybierz odpowiedni interfejs (np. <span>bridge</span>) → Kliknij <span>Apply</span> i <span>OK</span></li>
-      <li><strong>Dodawanie trasy domyślnej (Routing):</strong> Menu główne → <span>IP</span> → <span>Routes</span> → Zakładka <span>Routes</span> → Kliknij niebieski plus <span>+</span> → W polu <span>Dst. Address</span> zostaw <span>0.0.0.0/0</span> → W polu <span>Gateway</span> wpisz adres IP bramy dostawcy (np. <span>192.168.1.1</span>) → W polu <span>Distance</span> ustaw priorytet (np. <span>1</span>) → Kliknij <span>OK</span></li>
-      <li><strong>Podgląd i usuwanie:</strong> Listy w oknach <span>Address List</span> oraz <span>Route List</span> pozwalają na przeglądanie wpisów. Kliknięcie czerwonego minusa <span>-</span> usuwa zaznaczony rekord.</li>
+      <li><strong>Dodawanie adresu IP:</strong> Menu główne → <strong>IP</strong> → <strong>Addresses</strong> → Kliknij niebieski plus <strong>+</strong> → W polu <strong>Address</strong> wpisz np. <strong>192.168.88.1/24</strong> → W polu <strong>Interface</strong> wybierz odpowiedni interfejs (np. <strong>bridge</strong>) → Kliknij <strong>Apply</strong> i <strong>OK</strong></li>
+      <li><strong>Dodawanie trasy domyślnej (Routing):</strong> Menu główne → <strong>IP</strong> → <strong>Routes</strong> → Zakładka <strong>Routes</strong> → Kliknij niebieski plus <strong>+</strong> → W polu <strong>Dst. Address</strong> zostaw <strong>0.0.0.0/0</strong> → W polu <strong>Gateway</strong> wpisz adres IP bramy dostawcy (np. <strong>192.168.1.1</strong>) → W polu <strong>Distance</strong> ustaw priorytet (np. <strong>1</strong>) → Kliknij <strong>OK</strong></li>
+      <li><strong>Podgląd i usuwanie:</strong> Listy w oknach <strong>Address List</strong> oraz <strong>Route List</strong> pozwalają na przeglądanie wpisów. Kliknięcie czerwonego minusa <strong>-</strong> usuwa zaznaczony rekord.</li>
     </ul>
 
     <h3>Konfiguracja przez CLI (Komendy)</h3>
     <ul>
-      <li><span>/ip address add address=192.168.88.1/24 interface=bridge comment="LAN"</span> – przypisuje adres IP z maską do interfejsu bridge</li>
-      <li><span>/ip address print</span> – wyświetla listę wszystkich skonfigurowanych adresów IP wraz z interfejsami</li>
-      <li><span>/ip route add dst-address=0.0.0.0/0 gateway=192.168.1.1 distance=1 comment="Brama domyslna"</span> – dodaje domyślną trasę statyczną do internetu</li>
-      <li><span>/ip route print</span> – wyświetla pełną tabelę routingu (w tym statusy tras: AS, DAC itp.)</li>
+      <li><strong>/ip address add address=192.168.88.1/24 interface=bridge comment="LAN"</strong> – przypisuje adres IP z maską do interfejsu bridge</li>
+      <li><strong>/ip address print</strong> – wyświetla listę wszystkich skonfigurowanych adresów IP wraz z interfejsami</li>
+      <li><strong>/ip route add dst-address=0.0.0.0/0 gateway=192.168.1.1 distance=1 comment="Brama domyslna"</strong> – dodaje domyślną trasę statyczną do internetu</li>
+      <li><strong>/ip route print</strong> – wyświetla pełną tabelę routingu (w tym statusy tras: AS, DAC itp.)</li>
     </ul>
   </body>
 </html>

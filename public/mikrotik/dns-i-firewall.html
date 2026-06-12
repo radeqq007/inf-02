@@ -34,59 +34,59 @@
     <h3>Konfiguracja przez WinBox (GUI)</h3>
     <ul>
       <li>
-        <strong>Konfiguracja DNS:</strong> Menu główne → <span>IP</span> →
-        <span>DNS</span> → W polu <span>Servers</span> wpisz np.
-        <span>8.8.8.8</span>, kliknij strzałkę w dół i dodaj
-        <span>1.1.1.1</span> → Zaznacz opcję
-        <span>Allow Remote Requests</span> → Kliknij <span>OK</span>. Aby dodać
-        lokalny rekord, kliknij przycisk <span>Static</span> → Kliknij
-        <span>+</span> → Wpisz <span>Name</span> oraz <span>Address</span>.
+        <strong>Konfiguracja DNS:</strong> Menu główne → <strong>IP</strong> →
+        <strong>DNS</strong> → W polu <strong>Servers</strong> wpisz np.
+        <strong>8.8.8.8</strong>, kliknij strzałkę w dół i dodaj
+        <strong>1.1.1.1</strong> → Zaznacz opcję
+        <strong>Allow Remote Requests</strong> → Kliknij <strong>OK</strong>. Aby dodać
+        lokalny rekord, kliknij przycisk <strong>Static</strong> → Kliknij
+        <strong>+</strong> → Wpisz <strong>Name</strong> oraz <strong>Address</strong>.
       </li>
       <li>
         <strong>Uruchomienie NAT (Maskarada):</strong> Menu główne →
-        <span>IP</span> → <span>Firewall</span> → Zakładka <span>NAT</span> →
-        Kliknij niebieski plus <span>+</span> → W zakładce
-        <span>General</span> ustaw <span>Chain=srcnat</span> oraz
-        <span>Out. Interface=ether1</span> (lub inny port WAN) → Przejdź do
-        zakładki <span>Action</span> → W polu <span>Action</span> wybierz
-        <span>masquerade</span> → Kliknij <span>OK</span>
+        <strong>IP</strong> → <strong>Firewall</strong> → Zakładka <strong>NAT</strong> →
+        Kliknij niebieski plus <strong>+</strong> → W zakładce
+        <strong>General</strong> ustaw <strong>Chain=srcnat</strong> oraz
+        <strong>Out. Interface=ether1</strong> (lub inny port WAN) → Przejdź do
+        zakładki <strong>Action</strong> → W polu <strong>Action</strong> wybierz
+        <strong>masquerade</strong> → Kliknij <strong>OK</strong>
       </li>
       <li>
         <strong>Zabezpieczenie portu DNS (Zapora):</strong> Menu główne →
-        <span>IP</span> → <span>Firewall</span> → Zakładka
-        <span>Filter Rules</span> → Kliknij niebieski plus <span>+</span> →
-        Zakładka <span>General</span>: <span>Chain=input</span>,
-        <span>Protocol=17 (udp)</span>, <span>Dst. Port=53</span>,
-        <span>In. Interface=ether1</span> (port WAN) → Zakładka
-        <span>Action</span>: <span>Action=drop</span> → Kliknij <span>OK</span>.
-        Powtórz krok, zmieniając protokół na <span>6 (tcp)</span>.
+        <strong>IP</strong> → <strong>Firewall</strong> → Zakładka
+        <strong>Filter Rules</strong> → Kliknij niebieski plus <strong>+</strong> →
+        Zakładka <strong>General</strong>: <strong>Chain=input</strong>,
+        <strong>Protocol=17 (udp)</strong>, <strong>Dst. Port=53</strong>,
+        <strong>In. Interface=ether1</strong> (port WAN) → Zakładka
+        <strong>Action</strong>: <strong>Action=drop</strong> → Kliknij <strong>OK</strong>.
+        Powtórz krok, zmieniając protokół na <strong>6 (tcp)</strong>.
       </li>
     </ul>
 
     <h3>Konfiguracja przez CLI (Komendy)</h3>
     <ul>
       <li>
-        <span
+        <strong
           >/ip dns set servers=8.8.8.8,1.1.1.1 allow-remote-requests=yes</span
         >
         – konfiguruje serwery nadrzędne i zezwala na obsługę zapytań z sieci LAN
       </li>
       <li>
-        <span
+        <strong
           >/ip dns static add name="router.local" address=192.168.88.1
           ttl=1d</span
         >
         – dodaje statyczny lokalny rekord A
       </li>
       <li>
-        <span
+        <strong
           >/ip firewall nat add chain=srcnat out-interface=ether1
           action=masquerade comment="Maskarada WAN"</span
         >
         – uruchamia podstawowy NAT (wyjście na świat)
       </li>
       <li>
-        <span
+        <strong
           >/ip firewall filter add chain=input action=drop protocol=udp
           dst-port=53 in-interface=ether1 comment="Blokada DNS z WAN"</span
         >

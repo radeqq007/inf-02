@@ -10,7 +10,7 @@
 
     <h3>Teoria</h3>
     <ul>
-      <li>Adres IP zarządzania przełącznika przypisywany jest domyślnie do interfejsu logicznego <span>VLAN 1</span>.</li>
+      <li>Adres IP zarządzania przełącznika przypisywany jest domyślnie do interfejsu logicznego <strong>VLAN 1</strong>.</li>
       <li><strong>Brama domyślna (Default Gateway)</strong> – adres IP routera, do którego przełącznik lub hosty wysyłają ruch poza lokalną podsieć.</li>
       <li><strong>Serwer DHCP (DHCP Server)</strong> – usługa automatycznie przydzielająca adresy IP, maski, bramy oraz serwery DNS urządzeniom w sieci.</li>
       <li><strong>Pula adresów (Address Pool)</strong> – określony zakres adresów IP (od-do), z którego serwer DHCP może czerpać konfigurację dla klientów.</li>
@@ -19,20 +19,20 @@
 
     <h3>Konfiguracja przez Web GUI</h3>
     <ul>
-      <li><strong>Zmiana adresu IP LAN urządzenia:</strong> Menu główne → <span>Network</span> → <span>LAN</span> → W polu <span>IP Address</span> wpisz np. <span>192.168.0.2</span> → W polu <span>Subnet Mask</span> ustaw odpowiednią maskę (np. <span>255.255.255.0</span>) → Kliknij <span>Save</span></li>
-      <li><strong>Uruchomienie serwera DHCP:</strong> Menu główne → <span>Network</span> → <span>DHCP Server</span> → Zakładka <span>DHCP Server</span> → Zaznacz <span>Enable</span> → W polach <span>Start IP Address</span> i <span>End IP Address</span> wpisz zakres (np. <span>192.168.0.10</span> do <span>192.168.0.100</span>) → W polu <span>Default Gateway</span> wpisz adres IP bramy sieci → Kliknij <span>Save</span></li>
-      <li><strong>Rezerwacja adresu DHCP:</strong> Menu główne → <span>Network</span> → <span>DHCP Server</span> → Zakładka <span>Address Reservation</span> → Kliknij <span>Add New</span> → Wpisz <span>MAC Address</span> oraz przypisany mu <span>Reserved IP Address</span> → Ustaw status na <span>Enabled</span> → Kliknij <span>Save</span></li>
+      <li><strong>Zmiana adresu IP LAN urządzenia:</strong> Menu główne → <strong>Network</strong> → <strong>LAN</strong> → W polu <strong>IP Address</strong> wpisz np. <strong>192.168.0.2</strong> → W polu <strong>Subnet Mask</strong> ustaw odpowiednią maskę (np. <strong>255.255.255.0</strong>) → Kliknij <strong>Save</strong></li>
+      <li><strong>Uruchomienie serwera DHCP:</strong> Menu główne → <strong>Network</strong> → <strong>DHCP Server</strong> → Zakładka <strong>DHCP Server</strong> → Zaznacz <strong>Enable</strong> → W polach <strong>Start IP Address</strong> i <strong>End IP Address</strong> wpisz zakres (np. <strong>192.168.0.10</strong> do <strong>192.168.0.100</strong>) → W polu <strong>Default Gateway</strong> wpisz adres IP bramy sieci → Kliknij <strong>Save</strong></li>
+      <li><strong>Rezerwacja adresu DHCP:</strong> Menu główne → <strong>Network</strong> → <strong>DHCP Server</strong> → Zakładka <strong>Address Reservation</strong> → Kliknij <strong>Add New</strong> → Wpisz <strong>MAC Address</strong> oraz przypisany mu <strong>Reserved IP Address</strong> → Ustaw status na <strong>Enabled</strong> → Kliknij <strong>Save</strong></li>
     </ul>
 
     <h3>Konfiguracja przez CLI (Komendy)</h3>
     <ul>
-      <li><span>configure</span> – wejście w tryb konfiguracji globalnej systemu</li>
-      <li><span>interface vlan 1</span> – wejście do konfiguracji interfejsu logicznego VLAN 1</li>
-      <li><span>ip address 192.168.0.2 255.255.255.0</span> – przypisanie adresu IP oraz maski podsieci do interfejsu</li>
-      <li><span>ip dhcp server</span> – globalne włączenie usługi serwera DHCP na urządzeniu</li>
-      <li><span>ip dhcp pool LAN_POOL</span> – utworzenie puli DHCP o nazwie "LAN_POOL" i przejście do jej konfiguracji</li>
-      <li><span>network 192.168.0.0 255.255.255.0</span> – określenie podsieci dla puli DHCP</li>
-      <li><span>default-router 192.168.0.1</span> – wskazanie bramy domyślnej przekazywanej klientom DHCP</li>
+      <li><strong>configure</strong> – wejście w tryb konfiguracji globalnej systemu</li>
+      <li><strong>interface vlan 1</strong> – wejście do konfiguracji interfejsu logicznego VLAN 1</li>
+      <li><strong>ip address 192.168.0.2 255.255.255.0</strong> – przypisanie adresu IP oraz maski podsieci do interfejsu</li>
+      <li><strong>ip dhcp server</strong> – globalne włączenie usługi serwera DHCP na urządzeniu</li>
+      <li><strong>ip dhcp pool LAN_POOL</strong> – utworzenie puli DHCP o nazwie "LAN_POOL" i przejście do jej konfiguracji</li>
+      <li><strong>network 192.168.0.0 255.255.255.0</strong> – określenie podsieci dla puli DHCP</li>
+      <li><strong>default-router 192.168.0.1</strong> – wskazanie bramy domyślnej przekazywanej klientom DHCP</li>
     </ul>
   </body>
 </html>

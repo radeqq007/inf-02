@@ -10,91 +10,91 @@
 
     <h3>Zarządzanie użytkownikami i grupami</h3>
     <ul>
-      <li><span>net user nazwa hasło /add</span> – dodaje nowego użytkownika lokalnego</li>
-      <li><span>net user nazwa /delete</span> – usuwa użytkownika</li>
-      <li><span>net localgroup Administratorzy nazwa /add</span> – dodaje użytkownika do grupy</li>
-      <li><span>net localgroup nazwa_grupy /add</span> – tworzy nową grupę lokalną</li>
-      <li><span>net user nazwa /passwordreq:yes</span> – wymusza posiadanie hasła</li>
-      <li><span>net user nazwa /expires:DD/MM/YYYY</span> – ustawia datę wygaśnięcia konta</li>
+      <li><strong>net user nazwa hasło /add</strong> – dodaje nowego użytkownika lokalnego</li>
+      <li><strong>net user nazwa /delete</strong> – usuwa użytkownika</li>
+      <li><strong>net localgroup Administratorzy nazwa /add</strong> – dodaje użytkownika do grupy</li>
+      <li><strong>net localgroup nazwa_grupy /add</strong> – tworzy nową grupę lokalną</li>
+      <li><strong>net user nazwa /passwordreq:yes</strong> – wymusza posiadanie hasła</li>
+      <li><strong>net user nazwa /expires:DD/MM/YYYY</strong> – ustawia datę wygaśnięcia konta</li>
     </ul>
 
     <h3>Konfiguracja i diagnostyka sieci</h3>
     <ul>
-      <li><span>ipconfig /all</span> – szczegółowe informacje o wszystkich kartach sieciowych</li>
-      <li><span>ipconfig /flushdns</span> – czyści pamięć podręczną DNS</li>
-      <li><span>ping -n 4 adres_IP</span> – wysyła 4 pakiety ICMP do podanego adresu</li>
-      <li><span>tracert adres_IP</span> – pokazuje trasę pakietów do celu</li>
-      <li><span>netstat -ano</span> – otwarte porty i skojarzone z nimi procesy (PID)</li>
-      <li><span>nslookup nazwa_domeny</span> – zapytanie DNS</li>
-      <li><span>netsh interface ip set address "Ethernet" static IP maska brama</span> – ustawia statyczny adres IP</li>
-      <li><span>netsh interface ip set dns "Ethernet" static adres_DNS</span> – ustawia serwer DNS</li>
+      <li><strong>ipconfig /all</strong> – szczegółowe informacje o wszystkich kartach sieciowych</li>
+      <li><strong>ipconfig /flushdns</strong> – czyści pamięć podręczną DNS</li>
+      <li><strong>ping -n 4 adres_IP</strong> – wysyła 4 pakiety ICMP do podanego adresu</li>
+      <li><strong>tracert adres_IP</strong> – pokazuje trasę pakietów do celu</li>
+      <li><strong>netstat -ano</strong> – otwarte porty i skojarzone z nimi procesy (PID)</li>
+      <li><strong>nslookup nazwa_domeny</strong> – zapytanie DNS</li>
+      <li><strong>netsh interface ip set address "Ethernet" static IP maska brama</strong> – ustawia statyczny adres IP</li>
+      <li><strong>netsh interface ip set dns "Ethernet" static adres_DNS</strong> – ustawia serwer DNS</li>
     </ul>
 
     <h3>Zarządzanie rolami i funkcjami (Server Manager / PowerShell)</h3>
     <ul>
-      <li><span>Install-WindowsFeature -Name nazwa -IncludeManagementTools</span> – instaluje rolę lub funkcję (np. Web-Server dla IIS, AD-Domain-Services)</li>
-      <li><span>Uninstall-WindowsFeature -Name nazwa</span> – usuwa rolę lub funkcję</li>
-      <li><span>Get-WindowsFeature</span> – lista wszystkich dostępnych ról i ich stanu</li>
-      <li><span>Install-ADDSForest -DomainName "domena.local"</span> – promuje serwer do roli kontrolera domeny (Active Directory)</li>
+      <li><strong>Install-WindowsFeature -Name nazwa -IncludeManagementTools</strong> – instaluje rolę lub funkcję (np. Web-Server dla IIS, AD-Domain-Services)</li>
+      <li><strong>Uninstall-WindowsFeature -Name nazwa</strong> – usuwa rolę lub funkcję</li>
+      <li><strong>Get-WindowsFeature</strong> – lista wszystkich dostępnych ról i ich stanu</li>
+      <li><strong>Install-ADDSForest -DomainName "domena.local"</strong> – promuje serwer do roli kontrolera domeny (Active Directory)</li>
     </ul>
 
     <h3>Zarządzanie usługami</h3>
     <ul>
-      <li><span>sc start nazwa_usługi</span> – uruchamia usługę</li>
-      <li><span>sc stop nazwa_usługi</span> – zatrzymuje usługę</li>
-      <li><span>sc query nazwa_usługi</span> – sprawdza stan usługi</li>
-      <li><span>sc config nazwa_usługi start= auto</span> – ustawia automatyczny start usługi</li>
-      <li><span>Get-Service nazwa</span> – sprawdza usługę przez PowerShell</li>
-      <li><span>Restart-Service nazwa</span> – restartuje usługę przez PowerShell</li>
+      <li><strong>sc start nazwa_usługi</strong> – uruchamia usługę</li>
+      <li><strong>sc stop nazwa_usługi</strong> – zatrzymuje usługę</li>
+      <li><strong>sc query nazwa_usługi</strong> – sprawdza stan usługi</li>
+      <li><strong>sc config nazwa_usługi start= auto</strong> – ustawia automatyczny start usługi</li>
+      <li><strong>Get-Service nazwa</strong> – sprawdza usługę przez PowerShell</li>
+      <li><strong>Restart-Service nazwa</strong> – restartuje usługę przez PowerShell</li>
     </ul>
 
     <h3>Operacje na plikach i katalogach (cmd)</h3>
     <ul>
-      <li><span>dir /a</span> – listuje zawartość katalogu wraz z plikami ukrytymi</li>
-      <li><span>cd ścieżka</span> – przejście do wskazanego folderu</li>
-      <li><span>mkdir nazwa</span> – tworzy nowy katalog</li>
-      <li><span>copy źródło cel</span> – kopiuje plik</li>
-      <li><span>xcopy źródło cel /E /I</span> – kopiuje katalog razem z podkatalogami</li>
-      <li><span>del plik</span> – usuwa plik</li>
-      <li><span>rmdir /s /q katalog</span> – usuwa katalog wraz z zawartością (bez pytania)</li>
-      <li><span>icacls plik_lub_katalog /grant użytkownik:(F)</span> – nadaje pełne uprawnienia do zasobu</li>
+      <li><strong>dir /a</strong> – listuje zawartość katalogu wraz z plikami ukrytymi</li>
+      <li><strong>cd ścieżka</strong> – przejście do wskazanego folderu</li>
+      <li><strong>mkdir nazwa</strong> – tworzy nowy katalog</li>
+      <li><strong>copy źródło cel</strong> – kopiuje plik</li>
+      <li><strong>xcopy źródło cel /E /I</strong> – kopiuje katalog razem z podkatalogami</li>
+      <li><strong>del plik</strong> – usuwa plik</li>
+      <li><strong>rmdir /s /q katalog</strong> – usuwa katalog wraz z zawartością (bez pytania)</li>
+      <li><strong>icacls plik_lub_katalog /grant użytkownik:(F)</strong> – nadaje pełne uprawnienia do zasobu</li>
     </ul>
 
     <h3>Active Directory (PowerShell)</h3>
     <ul>
-      <li><span>New-ADUser -Name "Jan Kowalski" -SamAccountName "jkowalski" -AccountPassword (Read-Host -AsSecureString) -Enabled $true</span> – tworzy użytkownika AD</li>
-      <li><span>Remove-ADUser -Identity "jkowalski"</span> – usuwa użytkownika z AD</li>
-      <li><span>New-ADGroup -Name "nazwa" -GroupScope Global</span> – tworzy grupę w AD</li>
-      <li><span>Add-ADGroupMember -Identity "nazwa_grupy" -Members "jkowalski"</span> – dodaje użytkownika do grupy AD</li>
-      <li><span>Get-ADUser -Filter * | Select Name,SamAccountName</span> – lista wszystkich użytkowników AD</li>
-      <li><span>New-ADOrganizationalUnit -Name "nazwa_OU" -Path "DC=domena,DC=local"</span> – tworzy jednostkę organizacyjną (OU)</li>
+      <li><strong>New-ADUser -Name "Jan Kowalski" -SamAccountName "jkowalski" -AccountPassword (Read-Host -AsSecureString) -Enabled $true</strong> – tworzy użytkownika AD</li>
+      <li><strong>Remove-ADUser -Identity "jkowalski"</strong> – usuwa użytkownika z AD</li>
+      <li><strong>New-ADGroup -Name "nazwa" -GroupScope Global</strong> – tworzy grupę w AD</li>
+      <li><strong>Add-ADGroupMember -Identity "nazwa_grupy" -Members "jkowalski"</strong> – dodaje użytkownika do grupy AD</li>
+      <li><strong>Get-ADUser -Filter * | Select Name,SamAccountName</strong> – lista wszystkich użytkowników AD</li>
+      <li><strong>New-ADOrganizationalUnit -Name "nazwa_OU" -Path "DC=domena,DC=local"</strong> – tworzy jednostkę organizacyjną (OU)</li>
     </ul>
 
     <h3>Udostępnianie zasobów (Samba / SMB)</h3>
     <ul>
-      <li><span>New-SmbShare -Name "nazwa_udziału" -Path "C:\ścieżka" -FullAccess "Użytkownicy"</span> – tworzy udział sieciowy SMB</li>
-      <li><span>Get-SmbShare</span> – lista wszystkich udziałów sieciowych</li>
-      <li><span>Remove-SmbShare -Name "nazwa_udziału"</span> – usuwa udział</li>
-      <li><span>net share nazwa_udziału=C:\ścieżka /grant:użytkownik,FULL</span> – alternatywa przez cmd</li>
+      <li><strong>New-SmbShare -Name "nazwa_udziału" -Path "C:\ścieżka" -FullAccess "Użytkownicy"</strong> – tworzy udział sieciowy SMB</li>
+      <li><strong>Get-SmbShare</strong> – lista wszystkich udziałów sieciowych</li>
+      <li><strong>Remove-SmbShare -Name "nazwa_udziału"</strong> – usuwa udział</li>
+      <li><strong>net share nazwa_udziału=C:\ścieżka /grant:użytkownik,FULL</strong> – alternatywa przez cmd</li>
     </ul>
 
     <h3>Zapora systemu Windows (Windows Firewall)</h3>
     <ul>
-      <li><span>netsh advfirewall firewall add rule name="nazwa" protocol=TCP dir=in localport=80 action=allow</span> – otwiera port TCP 80</li>
-      <li><span>New-NetFirewallRule -DisplayName "nazwa" -Direction Inbound -Protocol TCP -LocalPort 443 -Action Allow</span> – to samo przez PowerShell</li>
-      <li><span>Get-NetFirewallRule | Where-Object {$_.Enabled -eq "True"}</span> – lista aktywnych reguł zapory</li>
-      <li><span>Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False</span> – wyłącza zaporę (ostrożnie!)</li>
+      <li><strong>netsh advfirewall firewall add rule name="nazwa" protocol=TCP dir=in localport=80 action=allow</strong> – otwiera port TCP 80</li>
+      <li><strong>New-NetFirewallRule -DisplayName "nazwa" -Direction Inbound -Protocol TCP -LocalPort 443 -Action Allow</strong> – to samo przez PowerShell</li>
+      <li><strong>Get-NetFirewallRule | Where-Object {$_.Enabled -eq "True"}</strong> – lista aktywnych reguł zapory</li>
+      <li><strong>Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False</strong> – wyłącza zaporę (ostrożnie!)</li>
     </ul>
 
     <h3>Diagnostyka systemu</h3>
     <ul>
-      <li><span>eventvwr</span> – otwiera Podgląd zdarzeń (logi systemowe, błędy, ostrzeżenia)</li>
-      <li><span>tasklist</span> – lista uruchomionych procesów</li>
-      <li><span>taskkill /PID numer /F</span> – wymusza zakończenie procesu po PID</li>
-      <li><span>systeminfo</span> – szczegółowe informacje o systemie i sprzęcie</li>
-      <li><span>wmic logicaldisk get size,freespace,caption</span> – zajętość dysków logicznych</li>
-      <li><span>sfc /scannow</span> – skanowanie i naprawa uszkodzonych plików systemowych</li>
-      <li><span>gpupdate /force</span> – wymusza ponowne zastosowanie zasad grupy (GPO)</li>
+      <li><strong>eventvwr</strong> – otwiera Podgląd zdarzeń (logi systemowe, błędy, ostrzeżenia)</li>
+      <li><strong>tasklist</strong> – lista uruchomionych procesów</li>
+      <li><strong>taskkill /PID numer /F</strong> – wymusza zakończenie procesu po PID</li>
+      <li><strong>systeminfo</strong> – szczegółowe informacje o systemie i sprzęcie</li>
+      <li><strong>wmic logicaldisk get size,freespace,caption</strong> – zajętość dysków logicznych</li>
+      <li><strong>sfc /scannow</strong> – skanowanie i naprawa uszkodzonych plików systemowych</li>
+      <li><strong>gpupdate /force</strong> – wymusza ponowne zastosowanie zasad grupy (GPO)</li>
     </ul>
   </body>
 </html>

@@ -11,25 +11,25 @@
     <h3>Teoria</h3>
     <ul>
       <li><strong>Trasa statyczna (Static Route)</strong> – ręcznie wpisana ścieżka do sieci docelowej, która nie znajduje się w bezpośrednio podłączonych podsieciach urządzenia.</li>
-      <li><strong>Sieć docelowa (Destination IP)</strong> – adres sieci lub konkretnego hosta, do którego chcemy przesłać pakiety danych (np. <span>10.0.0.0</span>).</li>
-      <li><strong>Maska podsieci (Subnet Mask)</strong> – maska sieci docelowej (np. <span>255.255.255.0</span> dla zapisu /24).</li>
+      <li><strong>Sieć docelowa (Destination IP)</strong> – adres sieci lub konkretnego hosta, do którego chcemy przesłać pakiety danych (np. <strong>10.0.0.0</strong>).</li>
+      <li><strong>Maska podsieci (Subnet Mask)</strong> – maska sieci docelowej (np. <strong>255.255.255.0</strong> dla zapisu /24).</li>
       <li><strong>Następny skok (Next Hop / Gateway)</strong> – adres IP interfejsu najbliższego routera na drodze do sieci docelowej.</li>
       <li><strong>Metryka (Metric)</strong> – koszt trasy; w przypadku istnienia dwóch tras do tego samego celu, wybierana jest ta z niższą metryką.</li>
     </ul>
 
     <h3>Konfiguracja przez Web GUI</h3>
     <ul>
-      <li><strong>Dodawanie trasy statycznej:</strong> Menu główne → <span>Advanced</span> → <span>Routing</span> → Zakładka <span>Static Route</span> → Kliknij przycisk <span>Add New</span> (lub niebieski plus) → W polu <span>Destination IP</span> wpisz sieć docelową (np. <span>192.168.2.0</span>) → W polu <span>Subnet Mask</span> wpisz maskę (np. <span>255.255.255.0</span>) → W polu <span>Next Hop</span> wpisz adres IP bramy (np. <span>192.168.1.254</span>) → W polu <span>Metric</span> wpisz priorytet (np. <span>1</span>) → Kliknij <span>Save</span></li>
-      <li><strong>Trasa domyślna:</strong> Aby stworzyć trasę domyślną (ruch do internetu), jako <span>Destination IP</span> wprowadź <span>0.0.0.0</span>, a jako <span>Subnet Mask</span> również <span>0.0.0.0</span>.</li>
-      <li><strong>Modyfikacja i usuwanie:</strong> W tabeli tras kliknięcie ikony notesu/edycji pozwala zmienić parametry, natomiast ikona kosza (lub zaznaczenie i kliknięcie <span>Delete</span>) usuwa trasę z tabeli routingu.</li>
+      <li><strong>Dodawanie trasy statycznej:</strong> Menu główne → <strong>Advanced</strong> → <strong>Routing</strong> → Zakładka <strong>Static Route</strong> → Kliknij przycisk <strong>Add New</strong> (lub niebieski plus) → W polu <strong>Destination IP</strong> wpisz sieć docelową (np. <strong>192.168.2.0</strong>) → W polu <strong>Subnet Mask</strong> wpisz maskę (np. <strong>255.255.255.0</strong>) → W polu <strong>Next Hop</strong> wpisz adres IP bramy (np. <strong>192.168.1.254</strong>) → W polu <strong>Metric</strong> wpisz priorytet (np. <strong>1</strong>) → Kliknij <strong>Save</strong></li>
+      <li><strong>Trasa domyślna:</strong> Aby stworzyć trasę domyślną (ruch do internetu), jako <strong>Destination IP</strong> wprowadź <strong>0.0.0.0</strong>, a jako <strong>Subnet Mask</strong> również <strong>0.0.0.0</strong>.</li>
+      <li><strong>Modyfikacja i usuwanie:</strong> W tabeli tras kliknięcie ikony notesu/edycji pozwala zmienić parametry, natomiast ikona kosza (lub zaznaczenie i kliknięcie <strong>Delete</strong>) usuwa trasę z tabeli routingu.</li>
     </ul>
 
     <h3>Konfiguracja przez CLI (Komendy)</h3>
     <ul>
-      <li><span>configure</span> – przejście do trybu konfiguracji urządzenia</li>
-      <li><span>ip route 192.168.2.0 255.255.255.0 192.168.1.254</span> – dodanie trasy do sieci 192.168.2.0/24 przez bramę 192.168.1.254</li>
-      <li><span>ip route 0.0.0.0 0.0.0.0 192.168.1.1</span> – zdefiniowanie statycznej trasy domyślnej (bramy domyślnej dla całego nieznanego ruchu)</li>
-      <li><span>show ip route</span> – wyświetlenie aktualnej tabeli routingu urządzenia wraz ze statusami tras</li>
+      <li><strong>configure</strong> – przejście do trybu konfiguracji urządzenia</li>
+      <li><strong>ip route 192.168.2.0 255.255.255.0 192.168.1.254</strong> – dodanie trasy do sieci 192.168.2.0/24 przez bramę 192.168.1.254</li>
+      <li><strong>ip route 0.0.0.0 0.0.0.0 192.168.1.1</strong> – zdefiniowanie statycznej trasy domyślnej (bramy domyślnej dla całego nieznanego ruchu)</li>
+      <li><strong>show ip route</strong> – wyświetlenie aktualnej tabeli routingu urządzenia wraz ze statusami tras</li>
     </ul>
   </body>
 </html>

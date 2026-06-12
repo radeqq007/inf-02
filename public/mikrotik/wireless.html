@@ -45,22 +45,22 @@
       <li><strong>Security Profile (Profil bezpieczeństwa)</strong> – zestaw ustawień definiujący standardy szyfrowania (np. WPA2, WPA3) oraz klucz współdzielony (hasło) do sieci bezprzewodowej</li>
       <li><strong>SSID (Service Set Identifier)</strong> – unikalna nazwa rozgłaszanej sieci Wi-Fi, widoczna dla urządzeń klienckich</li>
       <li><strong>Tryb ap-bridge (Access Point Bridge)</strong> – podstawowy tryb pracy karty radiowej, umożliwiający działanie jako punkt dostępowy obsługujący wielu klientów</li>
-      <li><strong>Pasmo (Band)</strong> – definiuje standardy i częstotliwość (np. <span>2ghz-b/g/n</span> lub <span>5ghz-a/n/ac</span>) optymalizujące prędkiem i zasięg połączenia</li>
+      <li><strong>Pasmo (Band)</strong> – definiuje standardy i częstotliwość (np. <strong>2ghz-b/g/n</strong> lub <strong>5ghz-a/n/ac</strong>) optymalizujące prędkiem i zasięg połączenia</li>
       <li><strong>Tabela rejestracji (Registration Table)</strong> – lista zawierająca szczegółowe statystyki aktualnie połączonych klientów (poziom sygnału Tx/Rx, uptime, CCQ)</li>
     </ul>
 
     <h3>Konfiguracja przez WinBox (GUI)</h3>
     <ul>
-      <li><strong>Tworzenie hasła (Security Profile):</strong> Menu główne → <span>Wireless</span> → Zakładka <span>Security Profiles</span> → Kliknij niebieski plus <span>+</span> → W polu <span>Name</span> wpisz nazwę profilu (np. <span>wifi_haslo</span>) → Ustaw <span>Mode=dynamic keys</span> → Zaznacz <span>Authentication Types=WPA2 PSK</span> → W polu <span>WPA2 Pre-Shared Key</span> wpisz swoje hasło do Wi-Fi → Kliknij <span>OK</span></li>
-      <li><strong>Konfiguracja i włączenie sieci (SSID):</strong> Menu główne → <span>Wireless</span> → Zakładka <span>WiFi Interfaces</span> → Kliknij dwa razy na interfejs radiowy (np. <span>wlan1</span>) → Przejdź do zakładki <span>Wireless</span> → Ustaw <span>Mode=ap-bridge</span> → W polu <span>Band</span> wybierz odpowiednie pasmo (np. <span>2ghz-b/g/n</span>) → W polu <span>SSID</span> wpisz nazwę swojej sieci bezprzewodowej → W polu <span>Security Profile</span> wybierz wcześniej utworzony profil (<span>wifi_haslo</span>) → Kliknij <span>Apply</span>, a następnie kliknij przycisk <span>Enable</span> (niebieski ptaszek) w oknie głównym <span>Interface List</span>, aby uruchomić nadawanie</li>
-      <li><strong>Podgląd podłączonych użytkowników:</strong> Menu główne → <span>Wireless</span> → Zakładka <span>Registration</span>. Znajdziesz tu listę MAC adresów podłączonych klientów wraz z siłą ich sygnału.</li>
+      <li><strong>Tworzenie hasła (Security Profile):</strong> Menu główne → <strong>Wireless</strong> → Zakładka <strong>Security Profiles</strong> → Kliknij niebieski plus <strong>+</strong> → W polu <strong>Name</strong> wpisz nazwę profilu (np. <strong>wifi_haslo</strong>) → Ustaw <strong>Mode=dynamic keys</strong> → Zaznacz <strong>Authentication Types=WPA2 PSK</strong> → W polu <strong>WPA2 Pre-Shared Key</strong> wpisz swoje hasło do Wi-Fi → Kliknij <strong>OK</strong></li>
+      <li><strong>Konfiguracja i włączenie sieci (SSID):</strong> Menu główne → <strong>Wireless</strong> → Zakładka <strong>WiFi Interfaces</strong> → Kliknij dwa razy na interfejs radiowy (np. <strong>wlan1</strong>) → Przejdź do zakładki <strong>Wireless</strong> → Ustaw <strong>Mode=ap-bridge</strong> → W polu <strong>Band</strong> wybierz odpowiednie pasmo (np. <strong>2ghz-b/g/n</strong>) → W polu <strong>SSID</strong> wpisz nazwę swojej sieci bezprzewodowej → W polu <strong>Security Profile</strong> wybierz wcześniej utworzony profil (<strong>wifi_haslo</strong>) → Kliknij <strong>Apply</strong>, a następnie kliknij przycisk <strong>Enable</strong> (niebieski ptaszek) w oknie głównym <strong>Interface List</strong>, aby uruchomić nadawanie</li>
+      <li><strong>Podgląd podłączonych użytkowników:</strong> Menu główne → <strong>Wireless</strong> → Zakładka <strong>Registration</strong>. Znajdziesz tu listę MAC adresów podłączonych klientów wraz z siłą ich sygnału.</li>
     </ul>
 
     <h3>Konfiguracja przez CLI (Komendy)</h3>
     <ul>
-      <li><span>/interface wireless security-profiles add name=wifi_profile mode=dynamic-keys authentication-types=wpa2-psk unicast-ciphers=aes-ccm group-ciphers=aes-ccm wpa2-pre-shared-key="SuperTajneHaslo"</span> – tworzy bezpieczny profil szyfrowania WPA2-PSK</li>
-      <li><span>/interface wireless set [find default-name=wlan1] mode=ap-bridge ssid="MojeWiFi" band=2ghz-b/g/n frequency=auto security-profile=wifi_profile disabled=no</span> – konfiguruje i włącza interfejs bezprzewodowy wlan1</li>
-      <li><span>/interface wireless registration-table print</span> – wyświetla listę podłączonych urządzeń bezprzewodowych wraz z parametrami sygnału</li>
+      <li><strong>/interface wireless security-profiles add name=wifi_profile mode=dynamic-keys authentication-types=wpa2-psk unicast-ciphers=aes-ccm group-ciphers=aes-ccm wpa2-pre-shared-key="SuperTajneHaslo"</strong> – tworzy bezpieczny profil szyfrowania WPA2-PSK</li>
+      <li><strong>/interface wireless set [find default-name=wlan1] mode=ap-bridge ssid="MojeWiFi" band=2ghz-b/g/n frequency=auto security-profile=wifi_profile disabled=no</strong> – konfiguruje i włącza interfejs bezprzewodowy wlan1</li>
+      <li><strong>/interface wireless registration-table print</strong> – wyświetla listę podłączonych urządzeń bezprzewodowych wraz z parametrami sygnału</li>
     </ul>
 
     <script src="/scripts/kalkulator.js"></script>

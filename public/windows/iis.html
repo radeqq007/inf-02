@@ -11,72 +11,72 @@
     <h3>Teoria</h3>
     <ul>
       <li>IIS to serwer WWW firmy Microsoft wbudowany w Windows Server</li>
-      <li>Obsługuje protokoły <strong>HTTP</strong> (port <span>80</span>) i <strong>HTTPS</strong> (port <span>443</span>)</li>
-      <li>Obsługuje też <strong>FTP</strong> (port <span>21</span>)</li>
+      <li>Obsługuje protokoły <strong>HTTP</strong> (port <strong>80</strong>) i <strong>HTTPS</strong> (port <strong>443</strong>)</li>
+      <li>Obsługuje też <strong>FTP</strong> (port <strong>21</strong>)</li>
       <li><strong>Witryna (Site)</strong> – logiczny kontener z ustawieniami (porty, certyfikaty, katalog główny)</li>
       <li><strong>Pula aplikacji (Application Pool)</strong> – izolowany proces obsługujący jedną lub więcej aplikacji</li>
-      <li><strong>Katalog główny (Document Root)</strong> – domyślnie <span>C:\inetpub\wwwroot</span></li>
+      <li><strong>Katalog główny (Document Root)</strong> – domyślnie <strong>C:\inetpub\wwwroot</strong></li>
       <li><strong>Katalog wirtualny</strong> – alias wskazujący na inny katalog fizyczny</li>
-      <li>Domyślny dokument: <span>index.html</span>, <span>index.htm</span>, <span>default.htm</span>, <span>default.asp</span></li>
+      <li>Domyślny dokument: <strong>index.html</strong>, <strong>index.htm</strong>, <strong>default.htm</strong>, <strong>default.asp</strong></li>
     </ul>
 
     <h3>Instalacja roli IIS (PowerShell)</h3>
     <ul>
-      <li><span>Install-WindowsFeature -Name Web-Server -IncludeManagementTools</span> – instalacja IIS z konsolą zarządzania</li>
-      <li><span>Install-WindowsFeature -Name Web-Server,Web-Ftp-Server -IncludeManagementTools</span> – instalacja IIS z FTP</li>
+      <li><strong>Install-WindowsFeature -Name Web-Server -IncludeManagementTools</strong> – instalacja IIS z konsolą zarządzania</li>
+      <li><strong>Install-WindowsFeature -Name Web-Server,Web-Ftp-Server -IncludeManagementTools</strong> – instalacja IIS z FTP</li>
     </ul>
 
     <h3>Zarządzanie witrynami (PowerShell – moduł WebAdministration)</h3>
     <ul>
-      <li><span>Import-Module WebAdministration</span> – ładuje moduł do zarządzania IIS</li>
-      <li><span>Get-Website</span> – lista witryn</li>
-      <li><span>New-Website -Name "MojaStrona" -PhysicalPath "C:\strony\mojstrona" -Port 80</span> – tworzy nową witrynę</li>
-      <li><span>Start-Website -Name "MojaStrona"</span> – uruchamia witrynę</li>
-      <li><span>Stop-Website -Name "MojaStrona"</span> – zatrzymuje witrynę</li>
-      <li><span>Remove-Website -Name "MojaStrona"</span> – usuwa witrynę</li>
-      <li><span>Set-WebBinding -Name "MojaStrona" -BindingInformation "*:8080:" -PropertyName Port -Value 8080</span> – zmienia port witryny</li>
+      <li><strong>Import-Module WebAdministration</strong> – ładuje moduł do zarządzania IIS</li>
+      <li><strong>Get-Website</strong> – lista witryn</li>
+      <li><strong>New-Website -Name "MojaStrona" -PhysicalPath "C:\strony\mojstrona" -Port 80</strong> – tworzy nową witrynę</li>
+      <li><strong>Start-Website -Name "MojaStrona"</strong> – uruchamia witrynę</li>
+      <li><strong>Stop-Website -Name "MojaStrona"</strong> – zatrzymuje witrynę</li>
+      <li><strong>Remove-Website -Name "MojaStrona"</strong> – usuwa witrynę</li>
+      <li><strong>Set-WebBinding -Name "MojaStrona" -BindingInformation "*:8080:" -PropertyName Port -Value 8080</strong> – zmienia port witryny</li>
     </ul>
 
     <h3>Zarządzanie pulami aplikacji (PowerShell)</h3>
     <ul>
-      <li><span>Get-WebConfiguration system.applicationHost/applicationPools/add</span> – lista pul</li>
-      <li><span>New-WebAppPool -Name "MojaPula"</span> – tworzy nową pulę aplikacji</li>
-      <li><span>Start-WebAppPool -Name "MojaPula"</span> – uruchamia pulę</li>
-      <li><span>Stop-WebAppPool -Name "MojaPula"</span> – zatrzymuje pulę</li>
-      <li><span>Restart-WebAppPool -Name "MojaPula"</span> – restartuje pulę (np. po zmianie konfiguracji)</li>
+      <li><strong>Get-WebConfiguration system.applicationHost/applicationPools/add</strong> – lista pul</li>
+      <li><strong>New-WebAppPool -Name "MojaPula"</strong> – tworzy nową pulę aplikacji</li>
+      <li><strong>Start-WebAppPool -Name "MojaPula"</strong> – uruchamia pulę</li>
+      <li><strong>Stop-WebAppPool -Name "MojaPula"</strong> – zatrzymuje pulę</li>
+      <li><strong>Restart-WebAppPool -Name "MojaPula"</strong> – restartuje pulę (np. po zmianie konfiguracji)</li>
     </ul>
 
     <h3>Konfiguracja HTTPS (certyfikat SSL)</h3>
     <ul>
       <li>Certyfikat można wygenerować samopodpisany lub pobrać od CA (Certificate Authority)</li>
-      <li><span>New-SelfSignedCertificate -DnsName "domena.local" -CertStoreLocation "Cert:\LocalMachine\My"</span> – generuje certyfikat samopodpisany</li>
+      <li><strong>New-SelfSignedCertificate -DnsName "domena.local" -CertStoreLocation "Cert:\LocalMachine\My"</strong> – generuje certyfikat samopodpisany</li>
       <li>Następnie w IIS Manager: witryna → Bindings → Add → HTTPS → wybierz certyfikat</li>
-      <li>Lub przez PowerShell: <span>New-WebBinding -Name "MojaStrona" -Protocol https -Port 443</span></li>
+      <li>Lub przez PowerShell: <strong>New-WebBinding -Name "MojaStrona" -Protocol https -Port 443</strong></li>
     </ul>
 
     <h3>FTP w IIS</h3>
     <ul>
-      <li><span>New-WebFtpSite -Name "MojFTP" -PhysicalPath "C:\ftp" -Port 21</span> – tworzy witrynę FTP</li>
+      <li><strong>New-WebFtpSite -Name "MojFTP" -PhysicalPath "C:\ftp" -Port 21</strong> – tworzy witrynę FTP</li>
       <li>FTP pasywny wymaga otwarcia zakresu portów w zaporze (domyślnie 1024–65535)</li>
       <li>Uwierzytelnianie: podstawowe (login + hasło) lub anonimowe</li>
-      <li>Port FTP: <span>21</span> (sterowanie), dane: <span>20</span> (tryb aktywny) lub losowy (tryb pasywny)</li>
+      <li>Port FTP: <strong>21</strong> (sterowanie), dane: <strong>20</strong> (tryb aktywny) lub losowy (tryb pasywny)</li>
     </ul>
 
     <h3>Katalogi wirtualne i uprawnienia</h3>
     <ul>
-      <li><span>New-WebVirtualDirectory -Site "Default Web Site" -Name "pliki" -PhysicalPath "D:\zasoby"</span> – tworzy katalog wirtualny</li>
+      <li><strong>New-WebVirtualDirectory -Site "Default Web Site" -Name "pliki" -PhysicalPath "D:\zasoby"</strong> – tworzy katalog wirtualny</li>
       <li>Konto <strong>IUSR</strong> – anonimowy użytkownik IIS; musi mieć uprawnienia do odczytu katalogu strony</li>
       <li>Konto <strong>IIS_IUSRS</strong> – grupa procesów roboczych IIS; musi mieć uprawnienia do katalogu aplikacji</li>
-      <li><span>icacls "C:\strony\mojstrona" /grant "IIS_IUSRS:(RX)"</span> – nadaje uprawnienia do odczytu i wykonywania</li>
+      <li><strong>icacls "C:\strony\mojstrona" /grant "IIS_IUSRS:(RX)"</strong> – nadaje uprawnienia do odczytu i wykonywania</li>
     </ul>
 
     <h3>Diagnostyka</h3>
     <ul>
-      <li>Logi IIS: <span>C:\inetpub\logs\LogFiles\</span></li>
-      <li><span>Get-EventLog -LogName Application -Source "IIS*"</span> – zdarzenia IIS w dzienniku zdarzeń</li>
-      <li><span>netstat -ano | findstr :80</span> – sprawdza, czy port 80 jest zajęty</li>
-      <li><span>iisreset</span> – restartuje cały serwis IIS (ostrożnie na produkcji)</li>
-      <li><span>iisreset /stop</span> i <span>iisreset /start</span> – zatrzymanie i start</li>
+      <li>Logi IIS: <strong>C:\inetpub\logs\LogFiles\</strong></li>
+      <li><strong>Get-EventLog -LogName Application -Source "IIS*"</strong> – zdarzenia IIS w dzienniku zdarzeń</li>
+      <li><strong>netstat -ano | findstr :80</strong> – sprawdza, czy port 80 jest zajęty</li>
+      <li><strong>iisreset</strong> – restartuje cały serwis IIS (ostrożnie na produkcji)</li>
+      <li><strong>iisreset /stop</strong> i <strong>iisreset /start</strong> – zatrzymanie i start</li>
     </ul>
   </body>
 </html>

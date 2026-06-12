@@ -19,18 +19,18 @@
 
     <h3>Konfiguracja przez WinBox (GUI)</h3>
     <ul>
-      <li><strong>Uruchomienie DHCP Client:</strong> Menu główne → <span>IP</span> → <span>DHCP Client</span> → Kliknij niebieski plus <span>+</span> → Wybierz <span>Interface</span> (np. <span>ether1</span> podłączony do modemu) → Upewnij się, że zaznaczone są opcje <span>Add Default Route=yes</span> oraz <span>Use Peer DNS=yes</span> → Kliknij <span>OK</span></li>
-      <li><strong>Kreator DHCP Server (Rekomendowany):</strong> Menu główne → <span>IP</span> → <span>DHCP Server</span> → Zakładka <span>DHCP</span> → Kliknij przycisk <span>DHCP Setup</span> → Wybierz interfejs lokalny (np. <span>bridge</span>) → Klikaj <span>Next</span>, weryfikując automatycznie wykryte parametry: przestrzeń adresową, bramę, pulę adresów (IP Pool) oraz serwery DNS → Kliknij <span>OK</span> na końcu kreatora</li>
-      <li><strong>Przypisywanie statycznego IP (Static Lease):</strong> Menu główne → <span>IP</span> → <span>DHCP Server</span> → Zakładka <span>Leases</span> → Znajdź aktywne urządzenie na liście (oznaczone jako <span>D</span> - dynamiczne) → Kliknij na nie dwa razy → Kliknij przycisk <span>Make Static</span> u góry okna</li>
+      <li><strong>Uruchomienie DHCP Client:</strong> Menu główne → <strong>IP</strong> → <strong>DHCP Client</strong> → Kliknij niebieski plus <strong>+</strong> → Wybierz <strong>Interface</strong> (np. <strong>ether1</strong> podłączony do modemu) → Upewnij się, że zaznaczone są opcje <strong>Add Default Route=yes</strong> oraz <strong>Use Peer DNS=yes</strong> → Kliknij <strong>OK</strong></li>
+      <li><strong>Kreator DHCP Server (Rekomendowany):</strong> Menu główne → <strong>IP</strong> → <strong>DHCP Server</strong> → Zakładka <strong>DHCP</strong> → Kliknij przycisk <strong>DHCP Setup</strong> → Wybierz interfejs lokalny (np. <strong>bridge</strong>) → Klikaj <strong>Next</strong>, weryfikując automatycznie wykryte parametry: przestrzeń adresową, bramę, pulę adresów (IP Pool) oraz serwery DNS → Kliknij <strong>OK</strong> na końcu kreatora</li>
+      <li><strong>Przypisywanie statycznego IP (Static Lease):</strong> Menu główne → <strong>IP</strong> → <strong>DHCP Server</strong> → Zakładka <strong>Leases</strong> → Znajdź aktywne urządzenie na liście (oznaczone jako <strong>D</strong> - dynamiczne) → Kliknij na nie dwa razy → Kliknij przycisk <strong>Make Static</strong> u góry okna</li>
     </ul>
 
     <h3>Konfiguracja przez CLI (Komendy)</h3>
     <ul>
-      <li><span>/ip dhcp-client add interface=ether1 add-default-route=yes use-peer-dns=yes disabled=no</span> – konfiguruje klienta na porcie WAN</li>
-      <li><span>/ip pool add name=dhcp_pool ranges=192.168.88.10-192.168.88.254</span> – utworzenie puli adresów IP dla sieci LAN</li>
-      <li><span>/ip dhcp-server add name=dhcp_lan interface=bridge address-pool=dhcp_pool lease-time=10m disabled=no</span> – dodanie serwera DHCP na interfejsie bridge</li>
-      <li><span>/ip dhcp-server network add address=192.168.88.0/24 gateway=192.168.88.1 dns-server=192.168.88.1</span> – konfiguracja parametrów sieciowych rozsyłanych do klientów</li>
-      <li><span>/ip dhcp-server lease make-static [find address=192.168.88.50]</span> – zamienia dynamiczny wpis w stałą dzierżawę statyczną</li>
+      <li><strong>/ip dhcp-client add interface=ether1 add-default-route=yes use-peer-dns=yes disabled=no</strong> – konfiguruje klienta na porcie WAN</li>
+      <li><strong>/ip pool add name=dhcp_pool ranges=192.168.88.10-192.168.88.254</strong> – utworzenie puli adresów IP dla sieci LAN</li>
+      <li><strong>/ip dhcp-server add name=dhcp_lan interface=bridge address-pool=dhcp_pool lease-time=10m disabled=no</strong> – dodanie serwera DHCP na interfejsie bridge</li>
+      <li><strong>/ip dhcp-server network add address=192.168.88.0/24 gateway=192.168.88.1 dns-server=192.168.88.1</strong> – konfiguracja parametrów sieciowych rozsyłanych do klientów</li>
+      <li><strong>/ip dhcp-server lease make-static [find address=192.168.88.50]</strong> – zamienia dynamiczny wpis w stałą dzierżawę statyczną</li>
     </ul>
   </body>
 </html>

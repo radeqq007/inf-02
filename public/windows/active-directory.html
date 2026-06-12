@@ -20,71 +20,71 @@
       <li><strong>SYSVOL</strong> – udostępniony katalog replikowany między DC; przechowuje skrypty i GPO</li>
       <li><strong>FSMO</strong> – 5 ról operacji pojedynczego wzorca (Schema Master, Domain Naming Master, PDC Emulator, RID Master, Infrastructure Master)</li>
       <li>Protokół uwierzytelniania: <strong>Kerberos</strong> (domyślnie) lub NTLM (legacy)</li>
-      <li>Baza AD przechowywana w pliku <span>ntds.dit</span></li>
+      <li>Baza AD przechowywana w pliku <strong>ntds.dit</strong></li>
     </ul>
 
     <h3>Instalacja roli AD DS i promocja do DC</h3>
     <ul>
-      <li><span>Install-WindowsFeature -Name AD-Domain-Services -IncludeManagementTools</span> – instalacja roli</li>
-      <li><span>Install-ADDSForest -DomainName "domena.local" -SafeModeAdministratorPassword (Read-Host -AsSecureString) -Force</span> – tworzy nowy las i promuje serwer do DC</li>
-      <li><span>Install-ADDSDomain -NewDomainName "oddzial" -ParentDomainName "domena.local" -Credential (Get-Credential)</span> – dodaje subdomenę do istniejącego lasu</li>
-      <li><span>Install-ADDSDomainController -DomainName "domena.local" -Credential (Get-Credential)</span> – dodaje dodatkowy DC do istniejącej domeny</li>
+      <li><strong>Install-WindowsFeature -Name AD-Domain-Services -IncludeManagementTools</strong> – instalacja roli</li>
+      <li><strong>Install-ADDSForest -DomainName "domena.local" -SafeModeAdministratorPassword (Read-Host -AsSecureString) -Force</strong> – tworzy nowy las i promuje serwer do DC</li>
+      <li><strong>Install-ADDSDomain -NewDomainName "oddzial" -ParentDomainName "domena.local" -Credential (Get-Credential)</strong> – dodaje subdomenę do istniejącego lasu</li>
+      <li><strong>Install-ADDSDomainController -DomainName "domena.local" -Credential (Get-Credential)</strong> – dodaje dodatkowy DC do istniejącej domeny</li>
     </ul>
 
     <h3>Użytkownicy (PowerShell)</h3>
     <ul>
-      <li><span>New-ADUser -Name "Jan Kowalski" -SamAccountName "jkowalski" -UserPrincipalName "jkowalski@domena.local" -AccountPassword (Read-Host -AsSecureString) -Enabled $true</span> – tworzy użytkownika</li>
-      <li><span>Set-ADAccountPassword -Identity "jkowalski" -NewPassword (Read-Host -AsSecureString) -Reset</span> – resetuje hasło</li>
-      <li><span>Enable-ADAccount -Identity "jkowalski"</span> – odblokowuje/aktywuje konto</li>
-      <li><span>Disable-ADAccount -Identity "jkowalski"</span> – wyłącza konto</li>
-      <li><span>Remove-ADUser -Identity "jkowalski"</span> – usuwa użytkownika</li>
-      <li><span>Get-ADUser -Filter * -Properties *</span> – lista wszystkich użytkowników z atrybutami</li>
-      <li><span>Move-ADObject -Identity "CN=Jan Kowalski,CN=Users,DC=domena,DC=local" -TargetPath "OU=Pracownicy,DC=domena,DC=local"</span> – przenosi użytkownika do OU</li>
+      <li><strong>New-ADUser -Name "Jan Kowalski" -SamAccountName "jkowalski" -UserPrincipalName "jkowalski@domena.local" -AccountPassword (Read-Host -AsSecureString) -Enabled $true</strong> – tworzy użytkownika</li>
+      <li><strong>Set-ADAccountPassword -Identity "jkowalski" -NewPassword (Read-Host -AsSecureString) -Reset</strong> – resetuje hasło</li>
+      <li><strong>Enable-ADAccount -Identity "jkowalski"</strong> – odblokowuje/aktywuje konto</li>
+      <li><strong>Disable-ADAccount -Identity "jkowalski"</strong> – wyłącza konto</li>
+      <li><strong>Remove-ADUser -Identity "jkowalski"</strong> – usuwa użytkownika</li>
+      <li><strong>Get-ADUser -Filter * -Properties *</strong> – lista wszystkich użytkowników z atrybutami</li>
+      <li><strong>Move-ADObject -Identity "CN=Jan Kowalski,CN=Users,DC=domena,DC=local" -TargetPath "OU=Pracownicy,DC=domena,DC=local"</strong> – przenosi użytkownika do OU</li>
     </ul>
 
     <h3>Grupy (PowerShell)</h3>
     <ul>
-      <li><span>New-ADGroup -Name "Ksiegowosc" -GroupScope Global -GroupCategory Security</span> – tworzy grupę zabezpieczeń o zasięgu globalnym</li>
-      <li><span>Add-ADGroupMember -Identity "Ksiegowosc" -Members "jkowalski","akowalska"</span> – dodaje użytkowników do grupy</li>
-      <li><span>Remove-ADGroupMember -Identity "Ksiegowosc" -Members "jkowalski"</span> – usuwa z grupy</li>
-      <li><span>Get-ADGroupMember -Identity "Ksiegowosc"</span> – lista członków grupy</li>
+      <li><strong>New-ADGroup -Name "Ksiegowosc" -GroupScope Global -GroupCategory Security</strong> – tworzy grupę zabezpieczeń o zasięgu globalnym</li>
+      <li><strong>Add-ADGroupMember -Identity "Ksiegowosc" -Members "jkowalski","akowalska"</strong> – dodaje użytkowników do grupy</li>
+      <li><strong>Remove-ADGroupMember -Identity "Ksiegowosc" -Members "jkowalski"</strong> – usuwa z grupy</li>
+      <li><strong>Get-ADGroupMember -Identity "Ksiegowosc"</strong> – lista członków grupy</li>
       <li><strong>Zasięgi grup:</strong> Local Domain (zasoby lokalne DC), Global (członkowie z tej domeny), Universal (wiele domen w lesie)</li>
       <li><strong>Typy grup:</strong> Security (uprawnienia), Distribution (listy mailingowe)</li>
     </ul>
 
     <h3>Jednostki organizacyjne – OU (PowerShell)</h3>
     <ul>
-      <li><span>New-ADOrganizationalUnit -Name "Pracownicy" -Path "DC=domena,DC=local"</span> – tworzy OU</li>
-      <li><span>New-ADOrganizationalUnit -Name "IT" -Path "OU=Pracownicy,DC=domena,DC=local"</span> – tworzy zagnieżdżoną OU</li>
-      <li><span>Remove-ADOrganizationalUnit -Identity "OU=Pracownicy,DC=domena,DC=local" -Recursive</span> – usuwa OU z zawartością</li>
-      <li><span>Get-ADOrganizationalUnit -Filter *</span> – lista OU</li>
+      <li><strong>New-ADOrganizationalUnit -Name "Pracownicy" -Path "DC=domena,DC=local"</strong> – tworzy OU</li>
+      <li><strong>New-ADOrganizationalUnit -Name "IT" -Path "OU=Pracownicy,DC=domena,DC=local"</strong> – tworzy zagnieżdżoną OU</li>
+      <li><strong>Remove-ADOrganizationalUnit -Identity "OU=Pracownicy,DC=domena,DC=local" -Recursive</strong> – usuwa OU z zawartością</li>
+      <li><strong>Get-ADOrganizationalUnit -Filter *</strong> – lista OU</li>
     </ul>
 
     <h3>Komputery w domenie</h3>
     <ul>
       <li>Dołączenie komputera: <strong>Panel sterowania → System → Zmień ustawienia → Domena</strong> lub PowerShell:</li>
-      <li><span>Add-Computer -DomainName "domena.local" -Credential (Get-Credential) -Restart</span></li>
-      <li><span>Get-ADComputer -Filter *</span> – lista komputerów w domenie</li>
-      <li><span>Remove-ADComputer -Identity "STACJA01"</span> – usuwa obiekt komputera z AD</li>
+      <li><strong>Add-Computer -DomainName "domena.local" -Credential (Get-Credential) -Restart</strong></li>
+      <li><strong>Get-ADComputer -Filter *</strong> – lista komputerów w domenie</li>
+      <li><strong>Remove-ADComputer -Identity "STACJA01"</strong> – usuwa obiekt komputera z AD</li>
     </ul>
 
     <h3>Zasady grupy – GPO</h3>
     <ul>
-      <li><span>New-GPO -Name "PolitykaBezpieczenstwa"</span> – tworzy nowy obiekt GPO</li>
-      <li><span>New-GPLink -Name "PolitykaBezpieczenstwa" -Target "OU=Pracownicy,DC=domena,DC=local"</span> – łączy GPO z OU</li>
-      <li><span>gpupdate /force</span> – wymusza natychmiastowe zastosowanie GPO na kliencie</li>
-      <li><span>gpresult /R</span> – pokazuje zastosowane GPO dla bieżącego użytkownika i komputera</li>
-      <li><span>Get-GPO -All</span> – lista wszystkich GPO w domenie</li>
-      <li>Narzędzie graficzne: <strong>Group Policy Management Console (GPMC)</strong> – <span>gpmc.msc</span></li>
+      <li><strong>New-GPO -Name "PolitykaBezpieczenstwa"</strong> – tworzy nowy obiekt GPO</li>
+      <li><strong>New-GPLink -Name "PolitykaBezpieczenstwa" -Target "OU=Pracownicy,DC=domena,DC=local"</strong> – łączy GPO z OU</li>
+      <li><strong>gpupdate /force</strong> – wymusza natychmiastowe zastosowanie GPO na kliencie</li>
+      <li><strong>gpresult /R</strong> – pokazuje zastosowane GPO dla bieżącego użytkownika i komputera</li>
+      <li><strong>Get-GPO -All</strong> – lista wszystkich GPO w domenie</li>
+      <li>Narzędzie graficzne: <strong>Group Policy Management Console (GPMC)</strong> – <strong>gpmc.msc</strong></li>
     </ul>
 
     <h3>Przydatne narzędzia graficzne</h3>
     <ul>
-      <li><span>dsa.msc</span> – Active Directory Users and Computers (użytkownicy, grupy, OU, komputery)</li>
-      <li><span>gpmc.msc</span> – Group Policy Management Console</li>
-      <li><span>dssite.msc</span> – Active Directory Sites and Services (replikacja, lokalizacje)</li>
-      <li><span>dnsmgmt.msc</span> – DNS Manager</li>
-      <li><span>dcpromo</span> – kreator promocji do kontrolera domeny (starsze systemy)</li>
+      <li><strong>dsa.msc</strong> – Active Directory Users and Computers (użytkownicy, grupy, OU, komputery)</li>
+      <li><strong>gpmc.msc</strong> – Group Policy Management Console</li>
+      <li><strong>dssite.msc</strong> – Active Directory Sites and Services (replikacja, lokalizacje)</li>
+      <li><strong>dnsmgmt.msc</strong> – DNS Manager</li>
+      <li><strong>dcpromo</strong> – kreator promocji do kontrolera domeny (starsze systemy)</li>
     </ul>
   </body>
 </html>
