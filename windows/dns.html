@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DNS</title>
+    <link rel="stylesheet" href="../src/style.css" />
+  </head>
+  <body>
+    <h2>DNS (Domain Name System)</h2>
+
+    <h3>Teoria</h3>
+    <ul>
+      <li>DNS tłumaczy nazwy domenowe (np. <span>google.com</span>) na adresy IP i odwrotnie</li>
+      <li>Działa na porcie <span>53 UDP</span> (zapytania) i <span>53 TCP</span> (transfery stref)</li>
+      <li><strong>Rekord A</strong> – nazwa → adres IPv4</li>
+      <li><strong>Rekord AAAA</strong> – nazwa → adres IPv6</li>
+      <li><strong>Rekord PTR</strong> – adres IP → nazwa (strefa odwrotna)</li>
+      <li><strong>Rekord MX</strong> – serwer poczty dla domeny</li>
+      <li><strong>Rekord CNAME</strong> – alias (jedna nazwa wskazuje na inną)</li>
+      <li><strong>Rekord NS</strong> – wskazuje autorytatywny serwer nazw dla strefy</li>
+      <li><strong>Rekord SOA</strong> – Start of Authority; metadane strefy (serwer główny, TTL, odświeżanie)</li>
+      <li><strong>Strefa podstawowa (Primary)</strong> – oryginał strefy, tu się wprowadza zmiany</li>
+      <li><strong>Strefa pomocnicza (Secondary)</strong> – kopia tylko do odczytu, pobierana z serwera głównego</li>
+      <li><strong>Strefa stub</strong> – zawiera tylko rekordy NS i SOA, używana do delegacji</li>
+      <li><strong>Serwer autorytatywny</strong> – odpowiada definitywnie za daną strefę</li>
+      <li><strong>Resolver/forwarder</strong> – serwer przekazujący zapytania dalej (np. do 8.8.8.8)</li>
+      <li>Plik <span>hosts</span> (<span>C:\Windows\System32\drivers\etc\hosts</span>) – lokalne przypisania nazw, mają pierwszeństwo przed DNS</li>
+    </ul>
+
+    <h3>Instalacja roli DNS (PowerShell)</h3>
+    <ul>
+      <li><span>Install-WindowsFeature -Name DNS -IncludeManagementTools</span> – instalacja serwera DNS</li>
+    </ul>
+
+    <h3>Zarządzanie strefami (PowerShell)</h3>
+    <ul>
+      <li><span>Add-DnsServerPrimaryZone -Name "domena.local" -ZoneFile "domena.local.dns"</span> – tworzy strefę podstawową (plik)</li>
+      <li><span>Add-DnsServerPrimaryZone -Name "domena.local" -ReplicationScope "Forest"</span> – strefa zintegrowana z AD</li>
+      <li><span>Add-DnsServerSecondaryZone -Name "domena.local" -ZoneFile "domena.local.dns" -MasterServers 192.168.1.1</span> – strefa pomocnicza</li>
+      <li><span>Remove-DnsServerZone -Name "domena.local"</span> – usuwa strefę</li>
+      <li><span>Get-DnsServerZone</span> – lista stref</li>
+    </ul>
+
+    <h3>Zarządzanie rekordami (PowerShell)</h3>
+    <ul>
+      <li><span>Add-DnsServerResourceRecordA -ZoneName "domena.local" -Name "serwer" -IPv4Address "192.168.1.10"</span> – rekord A</li>
+      <li><span>Add-DnsServerResourceRecordAAAA -ZoneName "domena.local" -Name "serwer" -IPv6Address "::1"</span> – rekord AAAA</li>
+      <li><span>Add-DnsServerResourceRecordCName -ZoneName "domena.local" -Name "www" -HostNameAlias "serwer.domena.local"</span> – rekord CNAME</li>
+      <li><span>Add-DnsServerResourceRecordMX -ZoneName "domena.local" -Name "." -MailExchange "mail.domena.local" -Preference 10</span> – rekord MX</li>
+      <li><span>Get-DnsServerResourceRecord -ZoneName "domena.local"</span> – lista rekordów strefy</li>
+      <li><span>Remove-DnsServerResourceRecord -ZoneName "domena.local" -Name "serwer" -RRType A</span> – usuwa rekord</li>
+    </ul>
+
+    <h3>Diagnostyka (cmd / PowerShell)</h3>
+    <ul>
+      <li><span>nslookup nazwa_domeny</span> – sprawdza rozwiązywanie nazw przez domyślny serwer DNS</li>
+      <li><span>nslookup nazwa_domeny adres_serwera_DNS</span> – sprawdza rozwiązywanie przez wskazany serwer</li>
+      <li><span>ipconfig /displaydns</span> – wyświetla lokalny bufor DNS</li>
+      <li><span>ipconfig /flushdns</span> – czyści lokalny bufor DNS</li>
+      <li><span>ipconfig /registerdns</span> – wymusza rejestrację rekordów klienta w DNS</li>
+      <li><span>Resolve-DnsName google.com</span> – zapytanie DNS przez PowerShell</li>
+      <li><span>Get-DnsServerStatistics</span> – statystyki serwera DNS</li>
+    </ul>
+
+    <h3>Strefa odwrotna (reverse lookup)</h3>
+    <ul>
+      <li>Służy do tłumaczenia adresu IP na nazwę (rekordy PTR)</li>
+      <li>Nazwa strefy dla sieci 192.168.1.0/24: <span>1.168.192.in-addr.arpa</span></li>
+      <li><span>Add-DnsServerPrimaryZone -NetworkId "192.168.1.0/24" -ZoneFile "1.168.192.in-addr.arpa.dns"</span> – tworzy strefę odwrotną</li>
+      <li><span>Add-DnsServerResourceRecordPtr -ZoneName "1.168.192.in-addr.arpa" -Name "10" -PtrDomainName "serwer.domena.local"</span> – dodaje rekord PTR</li>
+    </ul>
+  </body>
+</html>

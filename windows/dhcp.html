@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DHCP</title>
+    <link rel="stylesheet" href="../src/style.css" />
+  </head>
+  <body>
+    <h2>DHCP (Dynamic Host Configuration Protocol)</h2>
+
+    <h3>Teoria</h3>
+    <ul>
+      <li>DHCP automatycznie przydziela klientom: adres IP, maskę podsieci, bramę domyślną, serwer DNS</li>
+      <li>Działa na porcie <span>67 UDP</span> (serwer) i <span>68 UDP</span> (klient)</li>
+      <li>Proces przydziału adresu: <strong>DORA</strong> – Discover → Offer → Request → Acknowledge</li>
+      <li><strong>Dzierżawa (lease)</strong> – czas, na jaki adres jest przydzielony; po upływie klient odnawiia</li>
+      <li><strong>Zakres (scope)</strong> – pula adresów IP dostępnych do przydziału</li>
+      <li><strong>Wykluczenie (exclusion)</strong> – adresy z zakresu, których DHCP nie przydziela (np. dla urządzeń ze stałym IP)</li>
+      <li><strong>Rezerwacja</strong> – przypisanie konkretnego adresu IP do konkretnego adresu MAC</li>
+      <li><strong>Opcje DHCP</strong> – dodatkowe parametry przekazywane klientom (003 – brama, 006 – DNS, 015 – sufiks domeny)</li>
+      <li>Serwer DHCP w domenie AD musi być <strong>autoryzowany</strong> w Active Directory</li>
+    </ul>
+
+    <h3>Instalacja roli DHCP (PowerShell)</h3>
+    <ul>
+      <li><span>Install-WindowsFeature -Name DHCP -IncludeManagementTools</span> – instalacja serwera DHCP</li>
+      <li><span>Add-DhcpServerInDC -DnsName "serwer.domena.local" -IPAddress 192.168.1.1</span> – autoryzacja serwera w AD</li>
+    </ul>
+
+    <h3>Zarządzanie zakresami (PowerShell)</h3>
+    <ul>
+      <li><span>Add-DhcpServerv4Scope -Name "LAN" -StartRange 192.168.1.100 -EndRange 192.168.1.200 -SubnetMask 255.255.255.0 -State Active</span> – tworzy zakres</li>
+      <li><span>Get-DhcpServerv4Scope</span> – lista zakresów</li>
+      <li><span>Set-DhcpServerv4Scope -ScopeId 192.168.1.0 -LeaseDuration 1.00:00:00</span> – ustawia dzierżawę na 1 dzień</li>
+      <li><span>Remove-DhcpServerv4Scope -ScopeId 192.168.1.0</span> – usuwa zakres</li>
+    </ul>
+
+    <h3>Wykluczenia i rezerwacje (PowerShell)</h3>
+    <ul>
+      <li><span>Add-DhcpServerv4ExclusionRange -ScopeId 192.168.1.0 -StartRange 192.168.1.100 -EndRange 192.168.1.110</span> – wyklucza zakres adresów</li>
+      <li><span>Add-DhcpServerv4Reservation -ScopeId 192.168.1.0 -IPAddress 192.168.1.50 -ClientId "AA-BB-CC-DD-EE-FF" -Description "Drukarka"</span> – rezerwacja po MAC</li>
+      <li><span>Get-DhcpServerv4Reservation -ScopeId 192.168.1.0</span> – lista rezerwacji</li>
+      <li><span>Remove-DhcpServerv4Reservation -ScopeId 192.168.1.0 -IPAddress 192.168.1.50</span> – usuwa rezerwację</li>
+    </ul>
+
+    <h3>Opcje zakresu (PowerShell)</h3>
+    <ul>
+      <li><span>Set-DhcpServerv4OptionValue -ScopeId 192.168.1.0 -Router 192.168.1.1</span> – ustawia bramę domyślną (opcja 003)</li>
+      <li><span>Set-DhcpServerv4OptionValue -ScopeId 192.168.1.0 -DnsServer 192.168.1.1</span> – ustawia serwer DNS (opcja 006)</li>
+      <li><span>Set-DhcpServerv4OptionValue -ScopeId 192.168.1.0 -DnsDomain "domena.local"</span> – ustawia sufiks DNS (opcja 015)</li>
+      <li><span>Get-DhcpServerv4OptionValue -ScopeId 192.168.1.0</span> – sprawdza opcje zakresu</li>
+    </ul>
+
+    <h3>Dzierżawy i diagnostyka (PowerShell / cmd)</h3>
+    <ul>
+      <li><span>Get-DhcpServerv4Lease -ScopeId 192.168.1.0</span> – lista aktywnych dzierżaw</li>
+      <li><span>Remove-DhcpServerv4Lease -ScopeId 192.168.1.0 -IPAddress 192.168.1.150</span> – zwalnia adres</li>
+      <li><span>ipconfig /release</span> – klient zwalnia swój adres DHCP</li>
+      <li><span>ipconfig /renew</span> – klient pobiera nowy adres od DHCP</li>
+      <li><span>Get-DhcpServerv4Statistics</span> – statystyki serwera (wolne/zajęte adresy)</li>
+    </ul>
+
+    <h3>Przekaźnik DHCP (DHCP Relay Agent)</h3>
+    <ul>
+      <li>Potrzebny gdy klienci i serwer DHCP są w różnych podsieciach (router nie przepuszcza broadcastów)</li>
+      <li>Konfiguracja na routerze: <span>ip helper-address adres_serwera_DHCP</span> (Cisco) lub rola <strong>Remote Access</strong> w Windows Server</li>
+    </ul>
+  </body>
+</html>
