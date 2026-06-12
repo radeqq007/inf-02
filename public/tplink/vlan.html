@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TP-Link - Konfiguracja VLAN</title>
+  </head>
+  <body>
+    <h2>Konfiguracja sieci VLAN 802.1Q w TP-Link (Web GUI / CLI)</h2>
+
+    <h3>Teoria</h3>
+    <ul>
+      <li><strong>VLAN ID (VID)</strong> – unikalny identyfikator sieci VLAN (zakres od 1 do 4094). Domyślnym VLAN-em na wszystkich portach jest VLAN 1.</li>
+      <li><strong>Port Nietagowany (Untagged / Access)</strong> – port należący do jednego VLAN-u, do którego podłącza się urządzenia końcowe (komputery, drukarki). Ramki wychodzące z tego portu nie mają znacznika 802.1Q.</li>
+      <li><strong>Port Tagowany (Tagged / Trunk)</strong> – port przesyłający ruch z wielu VLAN-ów jednocześnie, zachowując ich znaczniki. Stosowany do połączeń między przełącznikami lub przełącznikiem a routerem.</li>
+      <li><strong>PVID (Port VLAN ID)</strong> – identyfikator domyślnego VLAN-u przypisany do portu fizycznego. Każda nietagowana ramka trafiająca na ten port zostanie oznaczona tym numerem VID.</li>
+    </ul>
+
+    <h3>Konfiguracja przez Web GUI</h3>
+    <ul>
+      <li><strong>Tworzenie nowego VLAN:</strong> Menu główne → <span>L2 FEATURES</span> → <span>VLAN</span> → Zakładka <span>802.1Q VLAN</span> → Kliknij <span>Add</span> → W polu <span>VLAN ID</span> wpisz numer (np. <span>10</span>) → W polu <span>VLAN Name</span> wpisz nazwę (np. <span>BIURO</span>)</li>
+      <li><strong>Przypisywanie portów (Web UI):</strong> W oknie tworzenia/edycji VLAN-u zaznacz wybrane porty fizyczne: dla urządzeń końcowych wybierz <span>Untagged</span>, a dla połączeń uplink (trunki) wybierz <span>Tagged</span> → Kliknij <span>Apply</span></li>
+      <li><strong>Ustawianie PVID:</strong> Menu główne → <span>L2 FEATURES</span> → <span>VLAN</span> → Zakładka <span>802.1Q VLAN Port Config</span> → Zaznacz porty, które mają działać w danym VLAN-ie jako nietagowane → W polu <span>PVID</span> wpisz numer tego VLAN-u (np. <span>10</span>) → Kliknij <span>Apply</span></li>
+    </ul>
+
+    <h3>Konfiguracja przez CLI (Komendy)</h3>
+    <ul>
+      <li><span>vlan 10</span> – utworzenie sieci VLAN o ID 10 (lub wejście w jej edycję)</li>
+      <li><span>name BIURO</span> – nadanie nazwy logicznej dla wybranego VLAN-u</li>
+      <li><span>interface gigabitEthernet 1/0/5</span> – wejście do trybu konfiguracji portu fizycznego numer 5</li>
+      <li><span>switchport general allowed vlan 10 untagged</span> – przypisanie portu do VLAN 10 jako port nietagowany (odpowiednik trybu access)</li>
+      <li><span>switchport pvid 10</span> – ustawienie PVID portu na wartość 10 (wymagane dla poprawnego przypisania ruchu nietagowanego)</li>
+      <li><span>interface gigabitEthernet 1/0/24</span> – wejście do trybu konfiguracji portu magistrali (Trunk)</li>
+      <li><span>switchport general allowed vlan 10,20 tagged</span> – zezwolenie na przesyłanie otagowanego ruchu z VLAN 10 i 20 przez ten port</li>
+    </ul>
+  </body>
+</html>
