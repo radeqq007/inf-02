@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>linux komendy</title>
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <h2>Komendy Linux</h2>
+
+    <h3>Zarzadzanie użytkownikami</h3>
+    <ul>
+      <li><span>useradd -m nazwa_uzytkownika</span> - dodaj użytkownika</li>
+      <li><span>passwd nazwa_użytkownika</span> - zmień hasło użytkownika</li>
+      <li><span>groupadd nazwa_grupy</span> - dodaj grupe</li>
+      <li>
+        <span>chown właściciel:grupa plik_lub_katalog</span> - zmien właściciela
+      </li>
+      <li>
+        <span>chmod [notacja_ósemkowa] plik_lub_katalog</span> – zmienia
+        uprawnienia dostępu (np. chmod 755)
+      </li>
+    </ul>
+
+    <h3>Konfiguracja i diagnostyka sieci</h3>
+    <ul>
+      <li><span>ip a</span> - wszystkie interfejsy sieciowe</li>
+      <li>
+        <span>ip r</span> - pokazuje tablice routingu (w tym brame domyślną)
+      </li>
+      <li>
+        <span>traceroute adres_IP</span> - pokazuje trase wysłanych pakietów
+      </li>
+      <li><span>ping -c 4 adres_IP</span> - c = ilosc pakietow</li>
+      <li><span>ss -tuln</span> - otwarte porty i usługi</li>
+      <li><span>hostnamectl set-hostname nowa_nazwa</span></li>
+    </ul>
+
+    <h3>Zarządzanie pakietami</h3>
+    <ul>
+      <li>
+        <span>zypper refresh</span> (lub <span>zypper ref</span>) - aktualizacja
+        list pakietów w repozytoriach
+      </li>
+      <li>
+        <span>zypper install nazwa_pakietu</span> (lub <span>zypper in</span>) -
+        instalacja oprogramowania (np. apache2, samba)
+      </li>
+      <li>
+        <span>zypper remove nazwa_pakietu</span> (lub <span>zypper rm</span>) -
+        odinstalowanie oprogramowania
+      </li>
+      <li>
+        <span>zypper update</span> (lub <span>zypper up</span>) - aktualizacja
+        zainstalowanych pakietów
+      </li>
+      <li>
+        <span>zypper search nazwa</span> (lub <span>zypper se</span>) -
+        wyszukiwanie pakietów w repozytoriach
+      </li>
+    </ul>
+
+    <h3>Narzędzia konfiguracyjne openSUSE</h3>
+    <ul>
+      <li>
+        <span>yast</span> - uruchamia potężne, tekstowe menu konfiguracji
+        systemu (sieć, użytkownicy, usługi)
+      </li>
+      <li>
+        <span>yast2</span> - uruchamia graficzny odpowiednik centrum sterowania
+        YaST (jeśli system ma GUI)
+      </li>
+    </ul>
+
+    <h3>Operacje na plikach i katalogach</h3>
+    <ul>
+      <li>
+        <span>ls -la</span> - listowanie zawartości wraz z plikami ukrytymi i
+        uprawnieniami
+      </li>
+      <li>
+        <span>cd ścieżka_do_katalogu</span> - przejście do wskazanego folderu
+      </li>
+      <li>
+        <span>mkdir -p nazwa_katalogu</span> - tworzenie katalogu (flaga -p
+        tworzy całą ścieżkę podkatalogów)
+      </li>
+      <li>
+        <span>cp -r plik_źródłowy plik_docelowy</span> - kopiowanie plików
+        (flaga -r kopiuje katalogi)
+      </li>
+      <li>
+        <span>mv źródło cel</span> - przenoszenie plików/katalogów lub zmiana
+        ich nazwy
+      </li>
+      <li>
+        <span>nano ścieżka_do_pliku</span> - prosty tekstowy edytor do
+        modyfikacji konfiguracji
+      </li>
+      <li>
+        <span>grep "fraza" plik</span> - wyszukiwanie określonego ciągu znaków w
+        pliku
+      </li>
+    </ul>
+
+    <h3>Zarządzanie systemem i usługami (Systemd)</h3>
+    <ul>
+      <li><span>systemctl start nazwa_usługi</span> - uruchomienie usługi</li>
+      <li><span>systemctl stop nazwa_usługi</span> - zatrzymanie usługi</li>
+      <li>
+        <span>systemctl restart nazwa_usługi</span> - ponowne uruchomienie (np.
+        po edycji konfiguracji)
+      </li>
+      <li>
+        <span>systemctl enable nazwa_usługi</span> - włączenie automatycznego
+        startu usługi przy rozruchu
+      </li>
+      <li>
+        <span>systemctl disable nazwa_usługi</span> - wyłączenie automatycznego
+        startu usługi
+      </li>
+      <li>
+        <span>systemctl status nazwa_usługi</span> - sprawdzenie stanu działania
+        usługi i ostatnich logów
+      </li>
+      <li>
+        <span>df -h</span> - pokazuje zajętość przestrzeni dyskowej w czytelnej
+        formie (GB/MB)
+      </li>
+      <li>
+        <span>htop</span> - interaktywny, tekstowy menedżer zadań (procesy,
+        pamięć RAM, CPU)
+      </li>
+    </ul>
+  </body>
+</html>

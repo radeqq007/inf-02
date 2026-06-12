@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>yast</title>
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <h2>YaST</h2>
+
+    <h3>Sieć i połączenia</h3>
+    <ul>
+      <li>
+        <strong>Konfiguracja adresacji IP, maski, bramy domyślnej i DNS:</strong
+        ><br />
+        System &rarr; Network Settings (Ustawienia sieciowe)
+      </li>
+      <li>
+        <strong>Zmiana nazwy komputera (Hostname):</strong><br />
+        System &rarr; Network Settings &rarr; zakładka Hostname/DNS
+      </li>
+      <li>
+        <strong>Konfiguracja zapory sieciowej (otwieranie portów):</strong
+        ><br />
+        Security and Users &rarr; Firewall (Zapora sieciowa)
+      </li>
+    </ul>
+
+    <h3>Zarządzanie systemem i kontami</h3>
+    <ul>
+      <li>
+        <strong>Tworzenie użytkowników, przypisywanie haseł i grup:</strong
+        ><br />
+        Security and Users &rarr; User and Group Management (Zarządzanie
+        użytkownikami i grupami)
+      </li>
+      <li>
+        <strong
+          >Instalacja i usuwanie oprogramowania (np. serwera Apache):</strong
+        ><br />
+        Software &rarr; Software Management (Zarządzanie oprogramowaniem)
+      </li>
+      <li>
+        <strong
+          >Włączanie i wyłączanie usług systemowych (zastępuje
+          systemctl):</strong
+        ><br />
+        System &rarr; Services Manager (Menedżer usług)
+      </li>
+    </ul>
+
+    <h3>Dyski i zasoby</h3>
+    <ul>
+      <li>
+        <strong>Partycjonowanie dysków, formatowanie i montowanie:</strong
+        ><br />
+        System &rarr; Partitioner (Partycjoner)
+      </li>
+      <li>
+        <strong>Konfiguracja udostępniania plików w sieci (Samba):</strong
+        ><br />
+        Network Services &rarr; Samba Server (wymaga wcześniejszego
+        zainstalowania pakietów)
+      </li>
+    </ul>
+  </body>
+</html>
