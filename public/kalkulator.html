@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head><title>Subnet Calculator</title></head>
+  <body>
+    <h2>Subnet Calculator</h2>
+    <input id="inp" type="text" placeholder="e.g. 192.168.1.50/25" size="25">
+    <button onclick="calc()">Calculate</button>
+    <pre id="out"></pre>
+
+    <script>
+      function calc() {
+        const raw = document.getElementById('inp').value.trim();
+        const out = document.getElementById('out');
+
+        // Accept bare /25 or full 192.168.1.1/25
+        let ip, prefix;
+        const m = raw.match(/^(?:(\d+\.\d+\.\d+\.\d+)\/)?(\d+)$/);
+        if (!m) { out.textContent = 'Bad input. Use /25 or 192.168.1.1/25'; return; }
+
+        prefix = parseInt(m[2]);
+        if (prefix < 0 || prefix > 32) { out.textContent = 'Prefix 0-32 only'; return; }
+
+        // Default IP if bare /25
+        const ipStr = m[1] || '0.0.0.0';
+        const parts = ipStr.split('.').map(Number);
+        if (parts.some(p => p < 0 || p > 255)) { out.textContent = 'Bad IP octets'; return; }
+
+        const ipInt = (parts[0]<<24 | parts[1]<<16 | parts[2]<<8 | parts[3]) >>> 0;
+
+        const mask = prefix === 0 ? 0 : (0xFFFFFFFF << (32 - prefix)) >>> 0;
+        const wildcard = (~mask) >>> 0;
+        const network = (ipInt & mask) >>> 0;
+        const broadcast = (network | wildcard) >>> 0;
+        const first = prefix < 31 ? network + 1 : network;
+        const last  = prefix < 31 ? broadcast - 1 : broadcast;
+        const hosts = prefix >= 31 ? (prefix === 32 ? 1 : 2) : (wildcard - 1);
+
+        function toIP(n) {
+          return [(n>>>24)&255,(n>>>16)&255,(n>>>8)&255,n&255].join('.');
+        }
+        function toMask(m) { return toIP(m); }
+
+        out.textContent = [
+          `Address:    ${ipStr}/${prefix}`,
+          `Netmask:    ${toMask(mask)}`,
+          `Wildcard:   ${toIP(wildcard)}`,
+          `Network:    ${toIP(network)}/${prefix}`,
+          `Broadcast:  ${toIP(broadcast)}`,
+          `First host: ${toIP(first)}`,
+          `Last host:  ${toIP(last)}`,
+          `Hosts:      ${hosts.toLocaleString()}`,
+        ].join('\n');
+      }
+
+      // Enter key support
+      document.getElementById('inp').addEventListener('keydown', e => { if (e.key === 'Enter') calc(); });
+    </script>
+  </body>
+</html>
