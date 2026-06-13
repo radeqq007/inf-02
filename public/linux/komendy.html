@@ -136,5 +136,17 @@
         pamięć RAM, CPU)
       </li>
     </ul>
+
+    <h3>Podzespoły i system</h3>
+    <ul>
+      <li><strong>uname -r</strong> - sprawdź wersję systemu
+      <li><strong>lscpu</strong> - sprawdź procesor (model / liczba rdzeni / architektura itp.) (CPU)
+      <li><strong>free -h</strong> - sprawdź RAM
+      <li><strong>cat /proc/meminfo</strong> - sprawdź RAM
+      <li><strong>lsblk</strong> - sprawdź dysk
+      <li><strong>lsblk -d -o NAME,MODEL,SERIAL,SIZE</strong> - sprawdź dysk (więcej informacji)
+      <li><strong>lspci | grep VGA</strong> - sprawdź kartę graficzną (GPU)
+      <li><strong>lspci | grep -i wireless</strong> - sprawdź karty sieciowe
+    </ul>
   </body>
 </html>
